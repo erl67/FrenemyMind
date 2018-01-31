@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114355625779239752}
   m_Layer: 0
   m_Name: Golden_Bill_NSMB2
-  m_TagString: spaceship
+  m_TagString: playerbullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -11,11 +11,14 @@ public class EnemySpaceship1Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(new Vector2(0f, 90f) * 0.1f);
+
+        //transform.Rotate(new Vector2(0f, 90f) * 0.1f);
+
+        //GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 0f));
 
         //add firing logic
 
         //add spawn
-		
-	}
+
+    }
 }

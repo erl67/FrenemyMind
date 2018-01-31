@@ -306,6 +306,8 @@
     <Compile Include="Assets\Scripts\BulletPlayer.cs" />
     <Compile Include="Assets\Scripts\EnemySpaceship1Controller.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\RepeatingBackground.cs" />
+    <Compile Include="Assets\Scripts\ScrollingObject.cs" />
     <Compile Include="Assets\Scripts\ShipController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

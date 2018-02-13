@@ -303,7 +303,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BulletEnemy.cs" />
     <Compile Include="Assets\Scripts\BulletPlayer.cs" />
+    <Compile Include="Assets\Scripts\EnemyShip1.cs" />
     <Compile Include="Assets\Scripts\EnemySpaceship1Controller.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\RepeatingBackground.cs" />

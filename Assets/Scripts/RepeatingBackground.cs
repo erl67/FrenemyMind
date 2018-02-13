@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class RepeatingBackground : MonoBehaviour {
 
-    private float hLength = 20.24f;
+    private float hLength = 19f;
 
 	void Update () {
         if (transform.position.x < -hLength)
         {
-
+            RepositionBackground();
         }
-	}
+    }
 
     void RepositionBackground()
     {

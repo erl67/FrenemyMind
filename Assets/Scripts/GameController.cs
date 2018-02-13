@@ -5,20 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public static GameController instance;
+    public static ShipController sc;
 
     public GameObject enemyCraftPrefab;
+    public Transform enemyBulletSpawn;
+    public GameObject enemyBulletPrefab;
+
+    public AudioSource enemyBulletFire;
     private float speed;
 
     private float timeElapsed;
     private float startTime;
 
-    //private bool newEnemy;
-
     public bool gameOver;
+    public bool spawn = true;
 
     private void Awake()
     {
-        gameOver = false;
         if (instance == null)
         {
             instance = this;
@@ -27,22 +30,16 @@ public class GameController : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+        gameOver = false;
     }
 
     void Start () {
-        timeElapsed = 0;
-        startTime = Time.time;
     }
 
-    // Update is called once per frame
     void Update () {
 
         if (GameController.instance.gameOver) {
-            //space2D.velocity = Vector2.zero;
-
-            //ScrollingObject.space2D.velocity = Vector2.zero;
-            //var background = new ScrollingObject();
-            //background.Stop();
+            PlayerDead();
         }
 
         if (gameOver && Input.GetKeyDown(KeyCode.R))
@@ -50,30 +47,35 @@ public class GameController : MonoBehaviour {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        timeElapsed += Time.deltaTime;
-
-        //timeElapsed = Time.time;
-        Debug.Log(message: "start " + timeElapsed + " mod " + ((int) timeElapsed % 3));
-        
-
-        if (Time.frameCount % 100 == 0)
+        if (!spawn && Input.GetKeyDown(KeyCode.N))
         {
-            Vector3 spawnOffset = new Vector3(0f, Random.Range(-5f, 5f), 0f);
+            Debug.Log(SceneManager.GetActiveScene().ToString());
+        }
 
-            var enemy = (GameObject) Instantiate(enemyCraftPrefab, spawnOffset, transform.rotation);
-
-            speed = Random.Range(1f, 30f) * -1;
+        if (Time.frameCount % 100 == 0 && spawn)
+        {
+            speed = Random.Range(20f, 100f) * -1;
+            Vector3 spawnOffset = new Vector3(0f, Random.Range(0f, -10f), 0f);
+            var enemy = (GameObject)Instantiate(enemyCraftPrefab, transform.position + spawnOffset, transform.rotation);
             enemy.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0f));
+            enemy.GetComponent<Rigidbody2D>().gravityScale = Random.Range(-.05f, .05f);
+            enemy.GetComponent<Rigidbody2D>().mass = Random.Range(.7f, 1.1f);
 
+            //GameObject eb = (GameObject)Instantiate(enemyBulletPrefab, transform.position, transform.rotation);
+            //Vector2 motion = new Vector2(10f, 0f);
+            //eb.GetComponent<Rigidbody2D>().AddForce(motion * -20);
+
+            //Debug.Log(enemy.GetComponent<Rigidbody2D>().gravityScale);
         }
 
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Enemey collision " + other.tag);
+        Debug.Log("GC Enemy collision " + other.tag);
         if (other.tag.Equals("boundary"))
         {
+            PlayerDead();
             Destroy(gameObject);
         }
     }
@@ -82,4 +84,7 @@ public class GameController : MonoBehaviour {
     {
         gameOver = true;
     }
+
+
+
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScrollingObject : MonoBehaviour {
 
-    public Rigidbody2D space2D; //or private?
+    private Rigidbody2D space2D;
     public float scrollSpeed;
 
     void Start () {
@@ -18,8 +18,10 @@ public class ScrollingObject : MonoBehaviour {
         space2D.velocity = Vector2.zero;
     }
 	
-	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (GameController.instance.gameOver)
+        {
+            space2D.velocity = Vector2.zero;
+        }
+    }
 }

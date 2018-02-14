@@ -20,11 +20,14 @@ public class GameController : MonoBehaviour {
 
     private float timeElapsed;
     private float startTime;
+    private float volume;
 
-    private float speedMin, speedMax, gMin, gMax, mMin, mMax;
+    private float speedMin, speedMax, gMin, gMax, mMin, mMax, sMin, sMax, interval;
+    private Vector3 scale;
 
     public bool gameOver;
     public bool spawn = true;
+    private bool rocks = false;
 
     private void Awake()
     {
@@ -40,6 +43,8 @@ public class GameController : MonoBehaviour {
     }
 
     void Start () {
+        AudioListener.volume = AudioListener.volume * .2f;
+
         switch (SceneManager.GetActiveScene().buildIndex)
         {
             case 0:
@@ -49,6 +54,9 @@ public class GameController : MonoBehaviour {
                 gMax = .03f;
                 mMin = .9f;
                 mMax = 1.1f;
+                sMin = .9f;
+                sMax = 1.1f;
+                interval = .1f;
                 break;
             case 1:
                 speedMin = 50f;
@@ -57,6 +65,10 @@ public class GameController : MonoBehaviour {
                 gMax = .2f;
                 mMin = .7f;
                 mMax = 1.3f;
+                sMin = .5f;
+                sMax = 1.5f;
+                interval = .1f;
+                rocks = true;
                 break;
             default:
                 break;
@@ -87,34 +99,59 @@ public class GameController : MonoBehaviour {
             Application.Quit();
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            volume = Time.timeScale == 1 ? AudioListener.volume : volume;
+            Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+            spawn = spawn == true ? false : true;
+            AudioListener.volume = Time.timeScale == 0 ? 0f : volume; 
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            AudioListener.volume = AudioListener.volume * .9f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            AudioListener.volume = AudioListener.volume * 1.05f;
+        }
+
+        timeElapsed += Time.deltaTime;
+
         if (Time.frameCount % 100 == 0 && spawn)
         {
             //Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
             //Debug.Log(stageDimensions.x + " " + stageDimensions.y);
             Vector3 spawnOffset = new Vector3(0f, Random.Range(6f, -4f), 0f);
             var enemy = (GameObject)Instantiate(enemyCraftPrefab, transform.position + spawnOffset, transform.rotation);
+            scale = enemy.GetComponent<Rigidbody2D>().transform.localScale * Random.Range(sMin, sMax);
+            enemy.GetComponent<Rigidbody2D>().transform.localScale = scale;
             speed = Random.Range(speedMin, speedMax) * -1;
             enemy.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0f));
             enemy.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin, gMax);
             enemy.GetComponent<Rigidbody2D>().mass = Random.Range(mMin, mMax);
         }
 
-        if (Time.frameCount % 120 == 0 && spawn)
+        //if (Time.frameCount % 120 == 0 && spawn && rocks)
+        if (timeElapsed % 3 < interval && spawn && rocks)
         {
             Vector3 spawnOffset = new Vector3(Random.Range(10f, -10f), Random.Range(10f, -10f), 0f);
             var rock = (GameObject)Instantiate(asteroidPrefab, transform.position + spawnOffset, transform.rotation);
-            speed = Random.Range(speedMin, speedMax + 300f) * -1;
+            rock.GetComponent<Transform>().Rotate(new Vector2(Random.Range(0f, 45f), 0f));
+            scale = rock.GetComponent<Rigidbody2D>().transform.localScale * Random.Range(sMin, sMax);
+            rock.GetComponent<Rigidbody2D>().transform.localScale = scale;
+            speed = Random.Range(speedMin - 20f, speedMax + 20f) * -1;
             rock.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0f));
-            rock.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin - .5f, gMax + .5f);
-            rock.GetComponent<Rigidbody2D>().mass = Random.Range(mMin - .5f, mMax + 1f);
+            rock.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin, gMax + .5f);
+            rock.GetComponent<Rigidbody2D>().mass = 1f * rock.GetComponent<Rigidbody2D>().transform.localScale.x * rock.GetComponent<Rigidbody2D>().transform.localScale.y;
         }
 
     }
 
     void OnBecameInvisible()
     {
-        Debug.Log("GC Invisibile");
-        Destroy(gameObject);
+        Debug.Log("GC Invisibile" + this.tag);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -123,7 +160,6 @@ public class GameController : MonoBehaviour {
         if (other.tag.Equals("boundary"))
         {
             PlayerDead();
-            Destroy(gameObject);
         }
     }
 

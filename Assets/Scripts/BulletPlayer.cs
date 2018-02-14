@@ -8,12 +8,14 @@ public class BulletPlayer : MonoBehaviour {
         gameObject.GetComponent<Transform>().Rotate(new Vector2(90f, 0f));
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.tag.Equals("enemy"))
+        if (other.tag.Equals("enemy"))
         {
-            Debug.Log("BP Bullet hit " + collision.tag);
-            Destroy(collision.gameObject);
+            //Debug.Log("BP Bullet hit " + other.tag);
+            other.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            other.GetComponent<Rigidbody2D>().gravityScale = 1;
+            other.GetComponent<Rigidbody2D>().mass = other.GetComponent<Rigidbody2D>().mass * .9f;
             Destroy(gameObject);
             ShipController.UpdateScore(1);
         }
@@ -21,7 +23,7 @@ public class BulletPlayer : MonoBehaviour {
 
     void OnBecameInvisible()
     {
-        Debug.Log("BP Invisibile " + this.tag);
+        //Debug.Log("BP Invisibile " + this.tag);
         Destroy(gameObject);
     }
 

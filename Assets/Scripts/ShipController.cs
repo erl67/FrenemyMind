@@ -29,8 +29,6 @@ public class ShipController : MonoBehaviour {
     public AudioSource bc;
     public AudioSource rockSound;
     public AudioSource enemyCollision;
-
-
     public AudioSource over;
 
     private void Awake()
@@ -50,7 +48,7 @@ public class ShipController : MonoBehaviour {
                 goal = 5;
                 break;
             case 1:
-                score = score;
+                //score = score;
                 health = 100;
                 goal = 20;
                 break;
@@ -78,7 +76,7 @@ public class ShipController : MonoBehaviour {
             rb.AddForce(motion);
             rb.AddForce(motion * speed);
             rb.mass = rb.mass * 0.9999f;
-            Debug.Log(rb.transform.position.x + " " + rb.transform.position.y);
+            //Debug.Log(rb.transform.position.x + " " + rb.transform.position.y);
         }
         else if (mouseH != 0f || mouseV != 0f)
         {
@@ -108,7 +106,7 @@ public class ShipController : MonoBehaviour {
             if (SceneManager.GetActiveScene().buildIndex != 1) txtLevelEnd.text += "\nPress (n) for next level";
             txtLevelEnd.text += "\nPress (q) to quit";
             Time.timeScale = 0;
-            StartCoroutine(EndLevel(50f));
+            //StartCoroutine(EndLevel(50f));
         }
 
         if (health <= 0)
@@ -117,11 +115,17 @@ public class ShipController : MonoBehaviour {
             bc.mute = true;
             over.Play();
             GameController.instance.spawn = false;
-            GameController.instance.PlayerDead();
+            if (txtLevel != null) txtLevel.text = "";
             txtLevelEnd.text = "Game Over\nYour Final Score is: " + score.ToString();
             txtLevelEnd.text += "\nPress (r) to continue";
             Time.timeScale = 0;
-            StartCoroutine(EndLevel(5f));
+            GameController.instance.PlayerDead();
+            //StartCoroutine(EndLevel(5f));
+        }
+
+        if (gameObject.GetComponent<Renderer>().isVisible == false)
+        {
+            //GameController.instance.PlayerDead();
         }
 
     }
@@ -175,8 +179,8 @@ public class ShipController : MonoBehaviour {
         if (other.tag.Equals("asteroid"))
         {
             rockSound.Play();
+            health = health - (int) (other.GetComponent<Rigidbody2D>().mass * 10f);
             Destroy(other.gameObject);
-            health = health - 5;
         }
     }
 
@@ -194,16 +198,7 @@ public class ShipController : MonoBehaviour {
     {
         Debug.Log("SC Invisibile " + this.tag);
         health = 0;
-
-        //rb.transform.position = new Vector3(-5f, -4f, 0);
-        //if (this.tag.Equals("spaceship"))
-        //{
-        //    this.rb.transform.position = new Vector3(-5f, -4f, 0);
-        //}
-        //else
-        //{
-        //    Destroy(gameObject);
-        //}
+        GameController.instance.PlayerDead();
     }
 
     IEnumerator EndLevel(float time)

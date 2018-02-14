@@ -8,7 +8,9 @@ public class EnemyShip1 : MonoBehaviour {
     public Transform enemyBulletSpawn;
     public GameObject enemyBulletPrefab;
 
+    public AudioSource[] audioSources;
     public AudioSource fire;    //using audio as a component of the prefab rather than a source
+    public AudioSource oof;
 
     private float timeElapsed;
     private float interval, speedMin, speedMax, duration;
@@ -32,7 +34,11 @@ public class EnemyShip1 : MonoBehaviour {
                 break;
         }
         timeElapsed = 0;
-        fire = gameObject.GetComponent<AudioSource>();
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        fire = audioSources[0];
+        oof = audioSources[1];
+        //fire = gameObject.GetComponent<AudioSource>();
+        //oof = gameObject.GetComponent<AudioSource>();
     }
 	
 	void Update () {
@@ -59,7 +65,10 @@ public class EnemyShip1 : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("EnemyShip1 collision " + other.tag);
-
+        if (other.tag.Equals("playerbullet"))
+        {
+            oof.Play();
+        }
         if (other.tag.Equals("enemy"))
         {
             Destroy(other.gameObject);

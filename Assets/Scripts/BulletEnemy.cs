@@ -15,7 +15,7 @@ public class BulletEnemy : MonoBehaviour {
     void Update()
     {
         gameObject.GetComponent<Transform>().Rotate(new Vector2(Random.Range(80f, 90f), 0f));
-        if (GetComponent<Renderer>().isVisible == false)
+        if (gameObject.GetComponent<Renderer>().isVisible == false)
         {
             Destroy(gameObject);
         }
@@ -25,10 +25,10 @@ public class BulletEnemy : MonoBehaviour {
     {
         //Debug.Log("BE Bullet hit " + other.tag);
 
-        if (other.tag.Equals("player"))
+        if (other.tag.Equals("player")) //handled in player class
         {
         }
-        if (other.tag.Equals("space") || other.tag.Equals("asteroid"))
+        if (other.tag.Equals("space") || other.tag. Equals("asteroid"))
         {
             Destroy(gameObject);
         }

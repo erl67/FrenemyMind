@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour {
     public Transform enemyBulletSpawn;
     public GameObject enemyBulletPrefab;
 
+    public GameObject asteroidPrefab;
+
     public AudioSource enemyBulletFire;
     public AudioSource background;
 
@@ -18,6 +20,8 @@ public class GameController : MonoBehaviour {
 
     private float timeElapsed;
     private float startTime;
+
+    private float speedMin, speedMax, gMin, gMax, mMin, mMax;
 
     public bool gameOver;
     public bool spawn = true;
@@ -36,6 +40,27 @@ public class GameController : MonoBehaviour {
     }
 
     void Start () {
+        switch (SceneManager.GetActiveScene().buildIndex)
+        {
+            case 0:
+                speedMin = 20f;
+                speedMax = 70f;
+                gMin = -.03f;
+                gMax = .03f;
+                mMin = .9f;
+                mMax = 1.1f;
+                break;
+            case 1:
+                speedMin = 50f;
+                speedMax = 100f;
+                gMin = -.2f;
+                gMax = .2f;
+                mMin = .7f;
+                mMax = 1.3f;
+                break;
+            default:
+                break;
+        }
     }
 
     void Update () {
@@ -47,27 +72,41 @@ public class GameController : MonoBehaviour {
         if (gameOver && Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            //SceneManager.LoadScene(0);
         }
 
         if (!spawn && Input.GetKeyDown(KeyCode.N))
         {
-            Destroy(gameObject);
-            spawn = true;
-            //Debug.Log(SceneManager.GetActiveScene().ToString());
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            PlayerDead();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        }
+
+        if (!spawn && Input.GetKeyDown(KeyCode.Q))
+        {
+            PlayerDead();
+            UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();
         }
 
         if (Time.frameCount % 100 == 0 && spawn)
         {
-            speed = Random.Range(50f, 100f) * -1;
             //Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
             //Debug.Log(stageDimensions.x + " " + stageDimensions.y);
-            Vector3 spawnOffset = new Vector3(0f, Random.Range(4f, -4f), 0f);
+            Vector3 spawnOffset = new Vector3(0f, Random.Range(6f, -4f), 0f);
             var enemy = (GameObject)Instantiate(enemyCraftPrefab, transform.position + spawnOffset, transform.rotation);
+            speed = Random.Range(speedMin, speedMax) * -1;
             enemy.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0f));
-            enemy.GetComponent<Rigidbody2D>().gravityScale = Random.Range(-.03f, .03f);
-            enemy.GetComponent<Rigidbody2D>().mass = Random.Range(.95f, 1.05f);
+            enemy.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin, gMax);
+            enemy.GetComponent<Rigidbody2D>().mass = Random.Range(mMin, mMax);
+        }
+
+        if (Time.frameCount % 120 == 0 && spawn)
+        {
+            Vector3 spawnOffset = new Vector3(Random.Range(10f, -10f), Random.Range(10f, -10f), 0f);
+            var rock = (GameObject)Instantiate(asteroidPrefab, transform.position + spawnOffset, transform.rotation);
+            speed = Random.Range(speedMin, speedMax + 300f) * -1;
+            rock.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0f));
+            rock.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin - .5f, gMax + .5f);
+            rock.GetComponent<Rigidbody2D>().mass = Random.Range(mMin - .5f, mMax + 1f);
         }
 
     }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 94ad290e4f3da7549912674808426c57
-timeCreated: 1516815388
+timeCreated: 1518590957
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -68,6 +68,70 @@ TextureImporter:
     21300122: asteroid_01_no_moblur_61
     21300124: asteroid_01_no_moblur_62
     21300126: asteroid_01_no_moblur_63
+    21300128: asteroid_sprite_0
+    21300130: asteroid_sprite_1
+    21300132: asteroid_sprite_2
+    21300134: asteroid_sprite_3
+    21300136: asteroid_sprite_4
+    21300138: asteroid_sprite_5
+    21300140: asteroid_sprite_6
+    21300142: asteroid_sprite_7
+    21300144: asteroid_sprite_8
+    21300146: asteroid_sprite_9
+    21300148: asteroid_sprite_10
+    21300150: asteroid_sprite_11
+    21300152: asteroid_sprite_12
+    21300154: asteroid_sprite_13
+    21300156: asteroid_sprite_14
+    21300158: asteroid_sprite_15
+    21300160: asteroid_sprite_16
+    21300162: asteroid_sprite_17
+    21300164: asteroid_sprite_18
+    21300166: asteroid_sprite_19
+    21300168: asteroid_sprite_20
+    21300170: asteroid_sprite_21
+    21300172: asteroid_sprite_22
+    21300174: asteroid_sprite_23
+    21300176: asteroid_sprite_24
+    21300178: asteroid_sprite_25
+    21300180: asteroid_sprite_26
+    21300182: asteroid_sprite_27
+    21300184: asteroid_sprite_28
+    21300186: asteroid_sprite_29
+    21300188: asteroid_sprite_30
+    21300190: asteroid_sprite_31
+    21300192: asteroid_sprite_32
+    21300194: asteroid_sprite_33
+    21300196: asteroid_sprite_34
+    21300198: asteroid_sprite_35
+    21300200: asteroid_sprite_36
+    21300202: asteroid_sprite_37
+    21300204: asteroid_sprite_38
+    21300206: asteroid_sprite_39
+    21300208: asteroid_sprite_40
+    21300210: asteroid_sprite_41
+    21300212: asteroid_sprite_42
+    21300214: asteroid_sprite_43
+    21300216: asteroid_sprite_44
+    21300218: asteroid_sprite_45
+    21300220: asteroid_sprite_46
+    21300222: asteroid_sprite_47
+    21300224: asteroid_sprite_48
+    21300226: asteroid_sprite_49
+    21300228: asteroid_sprite_50
+    21300230: asteroid_sprite_51
+    21300232: asteroid_sprite_52
+    21300234: asteroid_sprite_53
+    21300236: asteroid_sprite_54
+    21300238: asteroid_sprite_55
+    21300240: asteroid_sprite_56
+    21300242: asteroid_sprite_57
+    21300244: asteroid_sprite_58
+    21300246: asteroid_sprite_59
+    21300248: asteroid_sprite_60
+    21300250: asteroid_sprite_61
+    21300252: asteroid_sprite_62
+    21300254: asteroid_sprite_63
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -174,7 +238,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_0
+      name: asteroid_sprite_0
       rect:
         serializedVersion: 2
         x: 15
@@ -182,13 +246,13 @@ TextureImporter:
         width: 91
         height: 85
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_1
+      name: asteroid_sprite_1
       rect:
         serializedVersion: 2
         x: 140
@@ -196,13 +260,13 @@ TextureImporter:
         width: 96
         height: 90
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_2
+      name: asteroid_sprite_2
       rect:
         serializedVersion: 2
         x: 269
@@ -210,13 +274,13 @@ TextureImporter:
         width: 96
         height: 97
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_3
+      name: asteroid_sprite_3
       rect:
         serializedVersion: 2
         x: 396
@@ -224,13 +288,13 @@ TextureImporter:
         width: 100
         height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_4
+      name: asteroid_sprite_4
       rect:
         serializedVersion: 2
         x: 524
@@ -238,13 +302,13 @@ TextureImporter:
         width: 98
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_5
+      name: asteroid_sprite_5
       rect:
         serializedVersion: 2
         x: 654
@@ -252,13 +316,13 @@ TextureImporter:
         width: 98
         height: 106
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_6
+      name: asteroid_sprite_6
       rect:
         serializedVersion: 2
         x: 783
@@ -266,13 +330,13 @@ TextureImporter:
         width: 97
         height: 106
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_7
+      name: asteroid_sprite_7
       rect:
         serializedVersion: 2
         x: 914
@@ -280,13 +344,13 @@ TextureImporter:
         width: 94
         height: 105
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_8
+      name: asteroid_sprite_8
       rect:
         serializedVersion: 2
         x: 20
@@ -294,27 +358,27 @@ TextureImporter:
         width: 92
         height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_9
+      name: asteroid_sprite_9
       rect:
         serializedVersion: 2
         x: 147
         y: 778
         width: 93
         height: 100
-      alignment: 9
-      pivot: {x: 0.53741354, y: 0.61598086}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_10
+      name: asteroid_sprite_10
       rect:
         serializedVersion: 2
         x: 272
@@ -322,13 +386,13 @@ TextureImporter:
         width: 94
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_11
+      name: asteroid_sprite_11
       rect:
         serializedVersion: 2
         x: 400
@@ -336,13 +400,13 @@ TextureImporter:
         width: 93
         height: 97
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_12
+      name: asteroid_sprite_12
       rect:
         serializedVersion: 2
         x: 530
@@ -350,13 +414,13 @@ TextureImporter:
         width: 91
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_13
+      name: asteroid_sprite_13
       rect:
         serializedVersion: 2
         x: 656
@@ -364,13 +428,13 @@ TextureImporter:
         width: 92
         height: 92
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_14
+      name: asteroid_sprite_14
       rect:
         serializedVersion: 2
         x: 786
@@ -378,13 +442,13 @@ TextureImporter:
         width: 90
         height: 86
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_15
+      name: asteroid_sprite_15
       rect:
         serializedVersion: 2
         x: 914
@@ -392,13 +456,13 @@ TextureImporter:
         width: 90
         height: 88
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_16
+      name: asteroid_sprite_16
       rect:
         serializedVersion: 2
         x: 16
@@ -406,13 +470,13 @@ TextureImporter:
         width: 92
         height: 89
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_17
+      name: asteroid_sprite_17
       rect:
         serializedVersion: 2
         x: 142
@@ -420,13 +484,13 @@ TextureImporter:
         width: 98
         height: 93
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_18
+      name: asteroid_sprite_18
       rect:
         serializedVersion: 2
         x: 268
@@ -434,13 +498,13 @@ TextureImporter:
         width: 99
         height: 94
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_19
+      name: asteroid_sprite_19
       rect:
         serializedVersion: 2
         x: 396
@@ -448,13 +512,13 @@ TextureImporter:
         width: 100
         height: 99
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_20
+      name: asteroid_sprite_20
       rect:
         serializedVersion: 2
         x: 524
@@ -462,13 +526,13 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_21
+      name: asteroid_sprite_21
       rect:
         serializedVersion: 2
         x: 655
@@ -476,13 +540,13 @@ TextureImporter:
         width: 97
         height: 98
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_22
+      name: asteroid_sprite_22
       rect:
         serializedVersion: 2
         x: 784
@@ -490,13 +554,13 @@ TextureImporter:
         width: 96
         height: 95
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_23
+      name: asteroid_sprite_23
       rect:
         serializedVersion: 2
         x: 916
@@ -504,13 +568,13 @@ TextureImporter:
         width: 92
         height: 91
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_24
+      name: asteroid_sprite_24
       rect:
         serializedVersion: 2
         x: 20
@@ -518,13 +582,13 @@ TextureImporter:
         width: 92
         height: 89
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_25
+      name: asteroid_sprite_25
       rect:
         serializedVersion: 2
         x: 148
@@ -532,13 +596,13 @@ TextureImporter:
         width: 92
         height: 93
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_26
+      name: asteroid_sprite_26
       rect:
         serializedVersion: 2
         x: 272
@@ -546,13 +610,13 @@ TextureImporter:
         width: 97
         height: 92
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_27
+      name: asteroid_sprite_27
       rect:
         serializedVersion: 2
         x: 400
@@ -560,13 +624,13 @@ TextureImporter:
         width: 97
         height: 91
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_28
+      name: asteroid_sprite_28
       rect:
         serializedVersion: 2
         x: 527
@@ -574,13 +638,13 @@ TextureImporter:
         width: 97
         height: 90
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_29
+      name: asteroid_sprite_29
       rect:
         serializedVersion: 2
         x: 655
@@ -588,13 +652,13 @@ TextureImporter:
         width: 94
         height: 87
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_30
+      name: asteroid_sprite_30
       rect:
         serializedVersion: 2
         x: 784
@@ -602,13 +666,13 @@ TextureImporter:
         width: 92
         height: 88
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_31
+      name: asteroid_sprite_31
       rect:
         serializedVersion: 2
         x: 911
@@ -616,13 +680,13 @@ TextureImporter:
         width: 91
         height: 85
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_32
+      name: asteroid_sprite_32
       rect:
         serializedVersion: 2
         x: 19
@@ -630,13 +694,13 @@ TextureImporter:
         width: 84
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_33
+      name: asteroid_sprite_33
       rect:
         serializedVersion: 2
         x: 147
@@ -644,13 +708,13 @@ TextureImporter:
         width: 85
         height: 93
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_34
+      name: asteroid_sprite_34
       rect:
         serializedVersion: 2
         x: 275
@@ -658,13 +722,13 @@ TextureImporter:
         width: 89
         height: 97
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_35
+      name: asteroid_sprite_35
       rect:
         serializedVersion: 2
         x: 403
@@ -672,13 +736,13 @@ TextureImporter:
         width: 89
         height: 101
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_36
+      name: asteroid_sprite_36
       rect:
         serializedVersion: 2
         x: 531
@@ -686,13 +750,13 @@ TextureImporter:
         width: 89
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_37
+      name: asteroid_sprite_37
       rect:
         serializedVersion: 2
         x: 660
@@ -700,13 +764,13 @@ TextureImporter:
         width: 89
         height: 109
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_38
+      name: asteroid_sprite_38
       rect:
         serializedVersion: 2
         x: 788
@@ -714,13 +778,13 @@ TextureImporter:
         width: 92
         height: 110
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_39
+      name: asteroid_sprite_39
       rect:
         serializedVersion: 2
         x: 916
@@ -728,13 +792,13 @@ TextureImporter:
         width: 93
         height: 110
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_40
+      name: asteroid_sprite_40
       rect:
         serializedVersion: 2
         x: 23
@@ -742,13 +806,13 @@ TextureImporter:
         width: 90
         height: 105
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_41
+      name: asteroid_sprite_41
       rect:
         serializedVersion: 2
         x: 151
@@ -756,13 +820,13 @@ TextureImporter:
         width: 89
         height: 104
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_42
+      name: asteroid_sprite_42
       rect:
         serializedVersion: 2
         x: 279
@@ -770,13 +834,13 @@ TextureImporter:
         width: 89
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_43
+      name: asteroid_sprite_43
       rect:
         serializedVersion: 2
         x: 407
@@ -784,13 +848,13 @@ TextureImporter:
         width: 86
         height: 103
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_44
+      name: asteroid_sprite_44
       rect:
         serializedVersion: 2
         x: 535
@@ -798,13 +862,13 @@ TextureImporter:
         width: 85
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_45
+      name: asteroid_sprite_45
       rect:
         serializedVersion: 2
         x: 663
@@ -812,13 +876,13 @@ TextureImporter:
         width: 82
         height: 99
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_46
+      name: asteroid_sprite_46
       rect:
         serializedVersion: 2
         x: 788
@@ -826,13 +890,13 @@ TextureImporter:
         width: 85
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_47
+      name: asteroid_sprite_47
       rect:
         serializedVersion: 2
         x: 916
@@ -840,13 +904,13 @@ TextureImporter:
         width: 88
         height: 94
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_48
+      name: asteroid_sprite_48
       rect:
         serializedVersion: 2
         x: 20
@@ -854,13 +918,13 @@ TextureImporter:
         width: 92
         height: 93
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_49
+      name: asteroid_sprite_49
       rect:
         serializedVersion: 2
         x: 149
@@ -868,13 +932,13 @@ TextureImporter:
         width: 92
         height: 89
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_50
+      name: asteroid_sprite_50
       rect:
         serializedVersion: 2
         x: 275
@@ -882,13 +946,13 @@ TextureImporter:
         width: 97
         height: 93
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_51
+      name: asteroid_sprite_51
       rect:
         serializedVersion: 2
         x: 400
@@ -896,13 +960,13 @@ TextureImporter:
         width: 101
         height: 97
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_52
+      name: asteroid_sprite_52
       rect:
         serializedVersion: 2
         x: 528
@@ -910,13 +974,13 @@ TextureImporter:
         width: 102
         height: 97
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_53
+      name: asteroid_sprite_53
       rect:
         serializedVersion: 2
         x: 655
@@ -924,13 +988,13 @@ TextureImporter:
         width: 103
         height: 97
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_54
+      name: asteroid_sprite_54
       rect:
         serializedVersion: 2
         x: 780
@@ -938,13 +1002,13 @@ TextureImporter:
         width: 104
         height: 94
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_55
+      name: asteroid_sprite_55
       rect:
         serializedVersion: 2
         x: 908
@@ -952,13 +1016,13 @@ TextureImporter:
         width: 102
         height: 97
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_56
+      name: asteroid_sprite_56
       rect:
         serializedVersion: 2
         x: 12
@@ -966,13 +1030,13 @@ TextureImporter:
         width: 101
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_57
+      name: asteroid_sprite_57
       rect:
         serializedVersion: 2
         x: 143
@@ -980,13 +1044,13 @@ TextureImporter:
         width: 96
         height: 98
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_58
+      name: asteroid_sprite_58
       rect:
         serializedVersion: 2
         x: 272
@@ -994,13 +1058,13 @@ TextureImporter:
         width: 93
         height: 95
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_59
+      name: asteroid_sprite_59
       rect:
         serializedVersion: 2
         x: 400
@@ -1008,13 +1072,13 @@ TextureImporter:
         width: 92
         height: 93
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_60
+      name: asteroid_sprite_60
       rect:
         serializedVersion: 2
         x: 528
@@ -1022,13 +1086,13 @@ TextureImporter:
         width: 92
         height: 89
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_61
+      name: asteroid_sprite_61
       rect:
         serializedVersion: 2
         x: 656
@@ -1036,13 +1100,13 @@ TextureImporter:
         width: 92
         height: 86
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_62
+      name: asteroid_sprite_62
       rect:
         serializedVersion: 2
         x: 784
@@ -1050,13 +1114,13 @@ TextureImporter:
         width: 88
         height: 90
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: asteroid_01_no_moblur_63
+      name: asteroid_sprite_63
       rect:
         serializedVersion: 2
         x: 915
@@ -1064,7 +1128,7 @@ TextureImporter:
         width: 85
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

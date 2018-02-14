@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ShipController : MonoBehaviour {
@@ -10,9 +11,8 @@ public class ShipController : MonoBehaviour {
     public int shotCounter = 0;
     public int weaponsLoad = 50;
     public static int score = 0;
-    public static int health = 10;
-    public static int l1goal = 10;
-    public static int l2goal = 10;
+    public static int health = 50;
+    public static int goal = 10;
 
     private Rigidbody2D rb;
 
@@ -27,19 +27,40 @@ public class ShipController : MonoBehaviour {
 
     public AudioSource bulletFire;
     public AudioSource bc;
+    public AudioSource rockSound;
+    public AudioSource enemyCollision;
+
+
     public AudioSource over;
 
+    private void Awake()
+    {
+        txtLevelEnd.text = " ";
+    }
 
     void Start () {
         rb = gameObject.GetComponent <Rigidbody2D>();
         GameController.instance.spawn = true;
 
-        UpdateScore(0);
-        health = 10;
+        switch (SceneManager.GetActiveScene().buildIndex)
+        {
+            case 0:
+                score = 0;
+                health = 10;
+                goal = 5;
+                break;
+            case 1:
+                score = score;
+                health = 100;
+                goal = 20;
+                break;
+            default:
+                break;
+        }
+
         txtScore.text = "Score: " + score;
         txtAmmo.text = "Ammo: " + (weaponsLoad - shotCounter);
         txtLives.text = "Health: " + health;
-        txtLevelEnd.text = " ";
         Time.timeScale = 1;
         Object.Destroy(txtLevel, 3f);
     }
@@ -80,13 +101,14 @@ public class ShipController : MonoBehaviour {
         txtScore.text = "Score: " + score;
         txtLives.text = "Health: " + health;
 
-        if (score >= l1goal)
+        if (score >= goal)
         {
             GameController.instance.spawn = false;
             txtLevelEnd.text = "The End of this Level\nYour Final Score is: " + score.ToString();
-            txtLevelEnd.text += "\nPress (n) for next level";
+            if (SceneManager.GetActiveScene().buildIndex != 1) txtLevelEnd.text += "\nPress (n) for next level";
+            txtLevelEnd.text += "\nPress (q) to quit";
             Time.timeScale = 0;
-            StartCoroutine(EndLevel(5f));
+            StartCoroutine(EndLevel(50f));
         }
 
         if (health <= 0)
@@ -113,7 +135,7 @@ public class ShipController : MonoBehaviour {
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
             Vector2 motion = new Vector2(10f, 0f);
-            bullet.GetComponent<Rigidbody2D>().AddForce(motion * speed * 3);
+            bullet.GetComponent<Rigidbody2D>().AddForce(motion * speed * (3 + SceneManager.GetActiveScene().buildIndex));
 
             shotCounter++;
             txtAmmo.text = "Ammo: " + (weaponsLoad - shotCounter);
@@ -131,6 +153,7 @@ public class ShipController : MonoBehaviour {
         if (other.tag.Equals("enemy"))
         {
             health--;
+            enemyCollision.Play();
             Destroy(other.gameObject);
         }
 
@@ -148,6 +171,13 @@ public class ShipController : MonoBehaviour {
             rb.velocity = Vector3.zero;
             rb.AddForce(current * -3f);
         }
+
+        if (other.tag.Equals("asteroid"))
+        {
+            rockSound.Play();
+            Destroy(other.gameObject);
+            health = health - 5;
+        }
     }
 
     public static void UpdateScore(int amount)
@@ -163,15 +193,17 @@ public class ShipController : MonoBehaviour {
     void OnBecameInvisible()
     {
         Debug.Log("SC Invisibile " + this.tag);
-        rb.transform.position = new Vector3(-5f, -4f, 0);
-        if (this.tag.Equals("spaceship"))
-        {
-            this.rb.transform.position = new Vector3(-5f, -4f, 0);
-            health = 0;
-        } else
-        {
-            Destroy(gameObject);
-        }
+        health = 0;
+
+        //rb.transform.position = new Vector3(-5f, -4f, 0);
+        //if (this.tag.Equals("spaceship"))
+        //{
+        //    this.rb.transform.position = new Vector3(-5f, -4f, 0);
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     IEnumerator EndLevel(float time)

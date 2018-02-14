@@ -28,7 +28,7 @@ public class BulletEnemy : MonoBehaviour {
         if (other.tag.Equals("player"))
         {
         }
-        if (other.tag.Equals("space"))
+        if (other.tag.Equals("space") || other.tag.Equals("asteroid"))
         {
             Destroy(gameObject);
         }

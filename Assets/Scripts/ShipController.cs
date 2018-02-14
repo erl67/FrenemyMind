@@ -21,15 +21,17 @@ public class ShipController : MonoBehaviour {
     public Text txtLives;
     public Text txtLevel;
     public Text txtLevelEnd;
+    private bool endText = false;
 
     public Transform bulletSpawn;
     public GameObject bulletPrefab;
 
     public AudioSource bulletFire;
-    public AudioSource bc;
+    public AudioSource bulletCollision;
     public AudioSource rockSound;
     public AudioSource enemyCollision;
     public AudioSource over;
+    public AudioSource win;
 
     private void Awake()
     {
@@ -49,8 +51,9 @@ public class ShipController : MonoBehaviour {
                 break;
             case 1:
                 //score = score;
-                health = 100;
-                goal = 20;
+                health = 50;
+                goal = 15;
+                endText = true;
                 break;
             default:
                 break;
@@ -76,7 +79,6 @@ public class ShipController : MonoBehaviour {
             rb.AddForce(motion);
             rb.AddForce(motion * speed);
             rb.mass = rb.mass * 0.9999f;
-            //Debug.Log(rb.transform.position.x + " " + rb.transform.position.y);
         }
         else if (mouseH != 0f || mouseV != 0f)
         {
@@ -95,39 +97,41 @@ public class ShipController : MonoBehaviour {
             GameController.instance.PlayerDead();
         }
 
-        //Debug.Log("Motion:" + motion + " Mass:" + rb.mass + " Speed:" + speed);
         txtScore.text = "Score: " + score;
         txtLives.text = "Health: " + health;
 
-        if (score >= goal)
+        if (score >= goal)  //end of level
         {
+            GameController.instance.MuteBG();
             GameController.instance.spawn = false;
-            txtLevelEnd.text = "The End of this Level\nYour Final Score is: " + score.ToString();
-            if (SceneManager.GetActiveScene().buildIndex != 1) txtLevelEnd.text += "\nPress (n) for next level";
-            txtLevelEnd.text += "\nPress (q) to quit";
+            txtLevelEnd.text = "Level Complete\nYour Final Score is: " + score.ToString();
+
+            if (endText)
+            {
+                txtLevelEnd.text += "\nPress (q) to quit";
+                win.Play();
+            } else
+            {
+                txtLevelEnd.text += "\nPress (n) for next level";
+            }
             Time.timeScale = 0;
-            //StartCoroutine(EndLevel(50f));
         }
 
-        if (health <= 0)
+        if (health <= 0)    //player dead
         {
-            bulletFire.mute = true;
-            bc.mute = true;
-            over.Play();
+            GameController.instance.MuteBG();
             GameController.instance.spawn = false;
+            bulletFire.mute = true;
+            bulletCollision.mute = true;
+            over.Play();
+
             if (txtLevel != null) txtLevel.text = "";
             txtLevelEnd.text = "Game Over\nYour Final Score is: " + score.ToString();
             txtLevelEnd.text += "\nPress (r) to continue";
+
             Time.timeScale = 0;
             GameController.instance.PlayerDead();
-            //StartCoroutine(EndLevel(5f));
         }
-
-        if (gameObject.GetComponent<Renderer>().isVisible == false)
-        {
-            //GameController.instance.PlayerDead();
-        }
-
     }
 
     void Fire()
@@ -135,17 +139,15 @@ public class ShipController : MonoBehaviour {
         if (shotCounter < weaponsLoad)
         {
             bulletFire.Play();
-
-            GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-
-            Vector2 motion = new Vector2(10f, 0f);
-            bullet.GetComponent<Rigidbody2D>().AddForce(motion * speed * (3 + SceneManager.GetActiveScene().buildIndex));
-
             shotCounter++;
             txtAmmo.text = "Ammo: " + (weaponsLoad - shotCounter);
 
-            Debug.Log("Firing\n");
-            Destroy(bullet, 6f);
+            GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+            Vector2 motion = new Vector2(10f, 0f);
+            bullet.GetComponent<Rigidbody2D>().AddForce(motion * speed * (3 + SceneManager.GetActiveScene().buildIndex));
+
+            //Debug.Log("Firing\n");
+            Destroy(bullet, 8f);
         }
     }
 
@@ -163,8 +165,8 @@ public class ShipController : MonoBehaviour {
 
         if (other.tag.Equals("enemybullet"))
         {
-            //bc = other.GetComponent<AudioSource>();
-            bc.Play();
+            //bulletCollision = other.GetComponent<AudioSource>();  //if different things had different audio
+            bulletCollision.Play();
             Destroy(other.gameObject);
             health--;
         }
@@ -194,17 +196,15 @@ public class ShipController : MonoBehaviour {
         health += amount;
     }
 
-    void OnBecameInvisible()
+    void OnBecameInvisible()    //kill you for leaving the screen
     {
         Debug.Log("SC Invisibile " + this.tag);
         health = 0;
-        GameController.instance.PlayerDead();
     }
 
-    IEnumerator EndLevel(float time)
+    IEnumerator EndLevel(float time) //not used, was trying to delay
     {
         yield return new WaitForSecondsRealtime(time);
-        //Time.timeScale = 1;
     }
 
 }

@@ -13,6 +13,7 @@ public class BulletPlayer : MonoBehaviour {
         if (other.tag.Equals("enemy"))
         {
             //Debug.Log("BP Bullet hit " + other.tag);
+            other.GetComponent<Collider2D>().enabled = false; //keeps you from overkill
             other.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             other.GetComponent<Rigidbody2D>().gravityScale = 1;
             other.GetComponent<Rigidbody2D>().mass = other.GetComponent<Rigidbody2D>().mass * .9f;

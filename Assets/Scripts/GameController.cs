@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour {
     public bool spawn = true;
     private bool rocks = false;
 
+
     private void Awake()
     {
         if (instance == null)
@@ -43,7 +44,8 @@ public class GameController : MonoBehaviour {
     }
 
     void Start () {
-        AudioListener.volume = AudioListener.volume * .2f;
+        AudioListener.volume = .2f;
+        background = GetComponent<AudioSource>();   //background music
 
         switch (SceneManager.GetActiveScene().buildIndex)
         {
@@ -92,7 +94,7 @@ public class GameController : MonoBehaviour {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
 
-        if (!spawn && Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             PlayerDead();
             UnityEditor.EditorApplication.isPlaying = false;
@@ -133,18 +135,24 @@ public class GameController : MonoBehaviour {
             enemy.GetComponent<Rigidbody2D>().mass = Random.Range(mMin, mMax);
         }
 
-        //if (Time.frameCount % 120 == 0 && spawn && rocks)
         if (timeElapsed % 3 < interval && spawn && rocks)
         {
-            Vector3 spawnOffset = new Vector3(Random.Range(10f, -10f), Random.Range(10f, -10f), 0f);
+            //Vector3 spawnOffset = new Vector3(Random.Range(9f, 12f), Random.Range(-5F, 5f), 0f);
+            //Vector3 spawnOffset = new Vector3(0f, Random.Range(-5F, 5f), 0f);
+            Vector3 spawnOffset = new Vector3(Random.Range(-2f, 2f), Random.Range(-10f, 10f), 0f);
+
+
             var rock = (GameObject)Instantiate(asteroidPrefab, transform.position + spawnOffset, transform.rotation);
-            rock.GetComponent<Transform>().Rotate(new Vector2(Random.Range(0f, 45f), 0f));
+
+            rock.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, Random.Range(0f, 90f)));  //make rocks look different
+
             scale = rock.GetComponent<Rigidbody2D>().transform.localScale * Random.Range(sMin, sMax);
             rock.GetComponent<Rigidbody2D>().transform.localScale = scale;
-            speed = Random.Range(speedMin - 20f, speedMax + 20f) * -1;
-            rock.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0f));
-            rock.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin, gMax + .5f);
             rock.GetComponent<Rigidbody2D>().mass = 1f * rock.GetComponent<Rigidbody2D>().transform.localScale.x * rock.GetComponent<Rigidbody2D>().transform.localScale.y;
+
+            speed = Random.Range(10f, 200f) * -1;
+            rock.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0f));
+            rock.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin -.1f, gMax + .1f);
         }
 
     }
@@ -154,19 +162,14 @@ public class GameController : MonoBehaviour {
         Debug.Log("GC Invisibile" + this.tag);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void MuteBG()
     {
-        Debug.Log("GC Enemy collision " + other.tag);
-        if (other.tag.Equals("boundary"))
-        {
-            PlayerDead();
-        }
+        background.mute = true;
     }
 
     public void PlayerDead()
     {
-        background = gameObject.GetComponent<AudioSource>();
-        background.mute = true;
+        MuteBG();
         spawn = false;
         gameOver = true;
     }

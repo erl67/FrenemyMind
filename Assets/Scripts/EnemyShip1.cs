@@ -50,7 +50,7 @@ public class EnemyShip1 : MonoBehaviour {
 
         timeElapsed += Time.deltaTime;
 
-        if (timeElapsed % 3 < interval && GameController.instance.spawn == true)
+        if (timeElapsed % 3 < interval && GameController.instance.spawn == true) //enemy shooting
         {
             Transform spawn = this.transform;
             GameObject eb = (GameObject)Instantiate(enemyBulletPrefab, spawn.position, spawn.rotation);
@@ -71,7 +71,9 @@ public class EnemyShip1 : MonoBehaviour {
         }
         if (other.tag.Equals("enemy"))
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
+            other.GetComponent<Rigidbody2D>().AddForce(new Vector2(10f, 0f) * -1);
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(10f, 0f) * -1);
         }
 
         if (other.tag.Equals("enemybullet"))
@@ -81,12 +83,13 @@ public class EnemyShip1 : MonoBehaviour {
 
         if (other.tag.Equals("space"))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
         if (other.tag.Equals("asteroid"))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 10f) * -1);
         }
     }
 

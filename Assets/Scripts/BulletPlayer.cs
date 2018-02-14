@@ -10,8 +10,8 @@ public class BulletPlayer : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("enemy")) {
-
+        if (collision.tag.Equals("enemy"))
+        {
             Debug.Log("BP Bullet hit " + collision.tag);
             Destroy(collision.gameObject);
             Destroy(gameObject);

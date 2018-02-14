@@ -10,8 +10,8 @@ public class ShipController : MonoBehaviour {
     public int shotCounter = 0;
     public int weaponsLoad = 50;
     public static int score = 0;
-    public static int health = 2;
-    public static int l1goal = 2;
+    public static int health = 10;
+    public static int l1goal = 10;
     public static int l2goal = 10;
 
     private Rigidbody2D rb;
@@ -26,16 +26,22 @@ public class ShipController : MonoBehaviour {
     public GameObject bulletPrefab;
 
     public AudioSource bulletFire;
+    public AudioSource bc;
+    public AudioSource over;
 
-	void Start () {
+
+    void Start () {
         rb = gameObject.GetComponent <Rigidbody2D>();
-        //rb.gravityScale = 0;
-        
+        GameController.instance.spawn = true;
+
         UpdateScore(0);
+        health = 10;
+        txtScore.text = "Score: " + score;
         txtAmmo.text = "Ammo: " + (weaponsLoad - shotCounter);
         txtLives.text = "Health: " + health;
-
-        Object.Destroy(txtLevel, 2.0f);
+        txtLevelEnd.text = " ";
+        Time.timeScale = 1;
+        Object.Destroy(txtLevel, 3f);
     }
 
     void FixedUpdate() {
@@ -51,7 +57,7 @@ public class ShipController : MonoBehaviour {
             rb.AddForce(motion);
             rb.AddForce(motion * speed);
             rb.mass = rb.mass * 0.9999f;
-            //Debug.Log(rb.transform.position.x + " " + rb.transform.position.y);
+            Debug.Log(rb.transform.position.x + " " + rb.transform.position.y);
         }
         else if (mouseH != 0f || mouseV != 0f)
         {
@@ -59,7 +65,6 @@ public class ShipController : MonoBehaviour {
             rb.AddForce(motion);
             rb.AddForce(motion * speed);
         }
-
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
@@ -75,8 +80,6 @@ public class ShipController : MonoBehaviour {
         txtScore.text = "Score: " + score;
         txtLives.text = "Health: " + health;
 
-        //txtLevelEnd.text = endMessage;
-
         if (score >= l1goal)
         {
             GameController.instance.spawn = false;
@@ -84,18 +87,19 @@ public class ShipController : MonoBehaviour {
             txtLevelEnd.text += "\nPress (n) for next level";
             Time.timeScale = 0;
             StartCoroutine(EndLevel(5f));
-            score = 0;
         }
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            bulletFire.mute = true;
+            bc.mute = true;
+            over.Play();
+            GameController.instance.spawn = false;
             GameController.instance.PlayerDead();
             txtLevelEnd.text = "Game Over\nYour Final Score is: " + score.ToString();
             txtLevelEnd.text += "\nPress (r) to continue";
             Time.timeScale = 0;
             StartCoroutine(EndLevel(5f));
-            score = 0;
         }
 
     }
@@ -104,7 +108,6 @@ public class ShipController : MonoBehaviour {
     {
         if (shotCounter < weaponsLoad)
         {
-            //gameObject.GetComponent<AudioSource>().Play();
             bulletFire.Play();
 
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
@@ -116,14 +119,14 @@ public class ShipController : MonoBehaviour {
             txtAmmo.text = "Ammo: " + (weaponsLoad - shotCounter);
 
             Debug.Log("Firing\n");
-            Destroy(bullet, 4f);
+            Destroy(bullet, 6f);
         }
     }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("ShipController collision " + other.name + " " + other.tag);
+        Debug.Log("ShipController collision " + other.tag);
 
         if (other.tag.Equals("enemy"))
         {
@@ -133,11 +136,13 @@ public class ShipController : MonoBehaviour {
 
         if (other.tag.Equals("enemybullet"))
         {
-            health--;
+            //bc = other.GetComponent<AudioSource>();
+            bc.Play();
             Destroy(other.gameObject);
+            health--;
         }
 
-        if (other.tag.Equals("space"))
+        if (other.tag.Equals("space")) //stop player from fleeing
         {
             Vector2 current = rb.velocity;
             rb.velocity = Vector3.zero;
@@ -158,6 +163,7 @@ public class ShipController : MonoBehaviour {
     void OnBecameInvisible()
     {
         Debug.Log("SC Invisibile " + this.tag);
+        rb.transform.position = new Vector3(-5f, -4f, 0);
         if (this.tag.Equals("spaceship"))
         {
             this.rb.transform.position = new Vector3(-5f, -4f, 0);
@@ -171,7 +177,7 @@ public class ShipController : MonoBehaviour {
     IEnumerator EndLevel(float time)
     {
         yield return new WaitForSecondsRealtime(time);
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
     }
 
 }

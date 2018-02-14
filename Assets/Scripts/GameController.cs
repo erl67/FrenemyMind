@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour {
     public GameObject enemyBulletPrefab;
 
     public AudioSource enemyBulletFire;
+    public AudioSource background;
+
     private float speed;
 
     private float timeElapsed;
@@ -45,29 +47,35 @@ public class GameController : MonoBehaviour {
         if (gameOver && Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(0);
         }
 
         if (!spawn && Input.GetKeyDown(KeyCode.N))
         {
-            Debug.Log(SceneManager.GetActiveScene().ToString());
+            Destroy(gameObject);
+            spawn = true;
+            //Debug.Log(SceneManager.GetActiveScene().ToString());
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         if (Time.frameCount % 100 == 0 && spawn)
         {
-            speed = Random.Range(20f, 100f) * -1;
-            Vector3 spawnOffset = new Vector3(0f, Random.Range(0f, -10f), 0f);
+            speed = Random.Range(50f, 100f) * -1;
+            //Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+            //Debug.Log(stageDimensions.x + " " + stageDimensions.y);
+            Vector3 spawnOffset = new Vector3(0f, Random.Range(4f, -4f), 0f);
             var enemy = (GameObject)Instantiate(enemyCraftPrefab, transform.position + spawnOffset, transform.rotation);
             enemy.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0f));
-            enemy.GetComponent<Rigidbody2D>().gravityScale = Random.Range(-.05f, .05f);
-            enemy.GetComponent<Rigidbody2D>().mass = Random.Range(.7f, 1.1f);
-
-            //GameObject eb = (GameObject)Instantiate(enemyBulletPrefab, transform.position, transform.rotation);
-            //Vector2 motion = new Vector2(10f, 0f);
-            //eb.GetComponent<Rigidbody2D>().AddForce(motion * -20);
-
-            //Debug.Log(enemy.GetComponent<Rigidbody2D>().gravityScale);
+            enemy.GetComponent<Rigidbody2D>().gravityScale = Random.Range(-.03f, .03f);
+            enemy.GetComponent<Rigidbody2D>().mass = Random.Range(.95f, 1.05f);
         }
 
+    }
+
+    void OnBecameInvisible()
+    {
+        Debug.Log("GC Invisibile");
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -82,9 +90,10 @@ public class GameController : MonoBehaviour {
 
     public void PlayerDead()
     {
+        background = gameObject.GetComponent<AudioSource>();
+        background.mute = true;
+        spawn = false;
         gameOver = true;
     }
-
-
 
 }

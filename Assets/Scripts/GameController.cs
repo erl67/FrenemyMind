@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public static GameController instance;
-    public static ShipController sc;
 
     public GameObject enemyCraftPrefab;
     public Transform enemyBulletSpawn;
@@ -99,11 +98,11 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             PlayerDead();
-            UnityEditor.EditorApplication.isPlaying = false;
+            //UnityEditor.EditorApplication.isPlaying = false;  //hide for build
             Application.Quit();
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Pause))
         {
             volume = Time.timeScale == 1 ? AudioListener.volume : volume;
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
@@ -126,6 +125,16 @@ public class GameController : MonoBehaviour {
             ShipController.health = 999;
             ShipController.goal = 99;
             ShipController.weaponsLoad = 999;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Home))
+        {
+            SceneManager.LoadScene(0);
         }
 
         timeElapsed += Time.deltaTime;

@@ -11,15 +11,15 @@ public class Asteroid : MonoBehaviour {
     public AudioSource[] audioSources;
     public AudioSource damaged;    //using audio as a component of the prefab rather than a source
     public AudioSource destroyed;
-    private float timeElapsed, interval, spinAmount;
+    private float timeElapsed, minSize, spinAmount;
     private int spinRate;
 
     void Start()
     {
         timeElapsed = 0;
-        spinRate = Random.Range(5, 15);
+        spinRate = Random.Range(5, 20);
         spinAmount = Random.Range(10f, 90f);
-        interval = .3f; //minimum asteroid mass
+        minSize = .3f; //minimum asteroid mass
         AudioSource[] audioSources = GetComponents<AudioSource>();
         damaged = audioSources[0];
         destroyed = audioSources[1];
@@ -41,47 +41,72 @@ public class Asteroid : MonoBehaviour {
         }
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag.Equals("spaceship"))
+        {
+            ReduceAsteroid(.4f, .6f);
+            AsteroidDies();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag.Equals("asteroid"))
+        {
+            ReduceAsteroid(.995f, 1f);
+        }
+        if (other.tag.Equals("spaceship"))
+        {
+            ReduceAsteroid(.98f, 1f);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Asteroid collision " + other.tag);
 
         if (other.tag.Equals("enemy"))
         {
-            Destroy(other.gameObject);
-        }
-
-        if (other.tag.Equals("space"))
-        {
-            //Destroy(gameObject);
+            ReduceAsteroid(.8f, .9f);
         }
 
         if (other.tag.Equals("asteroid"))
         {
-            GetComponent<Rigidbody2D>().transform.localScale = GetComponent<Rigidbody2D>().transform.localScale * Random.Range(.9f, .99f);
-            GetComponent<Rigidbody2D>().mass = 1f * GetComponent<Rigidbody2D>().transform.localScale.x * GetComponent<Rigidbody2D>().transform.localScale.y;
+            ReduceAsteroid(.9f, .98f);
         }
 
         if (other.tag.Equals("playerbullet"))
         {
-            Destroy(other.gameObject);
-            GetComponent<Rigidbody2D>().transform.localScale = GetComponent<Rigidbody2D>().transform.localScale * Random.Range(.4f, .8f);
-            GetComponent<Rigidbody2D>().mass = 1f * GetComponent<Rigidbody2D>().transform.localScale.x * GetComponent<Rigidbody2D>().transform.localScale.y;
+            ReduceAsteroid(.5f, .9f);
 
-            if (GetComponent<Rigidbody2D>().mass > interval)
+            if (GetComponent<Rigidbody2D>().mass > minSize)
             {
                 damaged.Play();
             } else
             {
-                GetComponent<Collider2D>().enabled = false; //keeps you from overkill
-                GetComponent<Rigidbody2D>().mass = 0;
-                GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                GetComponent<Rigidbody2D>().angularVelocity = Random.Range(7f, 20f);
-
                 destroyed.Play();
-                Destroy(gameObject, 2f); //delay destroy so sound plays
+                AsteroidDies();
                 ShipController.UpdateScore(1);
             }
         }
+    }
+
+    private void ReduceAsteroid(float min, float max)    //collision reduces up to 10% of asteroid
+    {
+        GetComponent<Rigidbody2D>().transform.localScale = GetComponent<Rigidbody2D>().transform.localScale * Random.Range(min, max);
+        GetComponent<Rigidbody2D>().mass = GetComponent<Rigidbody2D>().transform.localScale.x * GetComponent<Rigidbody2D>().transform.localScale.y;
+    }
+
+    private void AsteroidDies()
+    {
+        GetComponent<Collider2D>().enabled = false; //keeps you from overkill
+        GetComponent<Rigidbody2D>().mass = 0;
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        GetComponent<Rigidbody2D>().angularVelocity = GetComponent<Rigidbody2D>().angularVelocity * Random.Range(-.5f, .5f);
+        GetComponent<SpriteRenderer>().color = new Color(1f, .9f, .9f, .5f);
+
+        Destroy(gameObject, 2f); //delay destroy so sound plays
     }
 
     void OnBecameInvisible()

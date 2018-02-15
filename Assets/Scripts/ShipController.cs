@@ -5,14 +5,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ShipController : MonoBehaviour {
-
-    public float speed = 10f;
-
     public int shotCounter = 0;
-    public int weaponsLoad = 50;
+    public static int weaponsLoad = 50;
     public static int score = 0;
     public static int health = 50;
-    public static int goal = 10;
+    public static int goal;
+    public float speed = 10f;
+
+    public float moveSpeed = 10f;
+    private float mouseMultiplier = 1.5f;
 
     private Rigidbody2D rb;
 
@@ -47,12 +48,13 @@ public class ShipController : MonoBehaviour {
             case 0:
                 score = 0;
                 health = 10;
-                goal = 5;
+                goal = 10;
                 break;
             case 1:
                 //score = score;
                 health = 50;
-                goal = 15;
+                goal = 25; //cumulative
+                weaponsLoad = 99;
                 endText = true;
                 break;
             default:
@@ -76,15 +78,14 @@ public class ShipController : MonoBehaviour {
         if (moveH != 0f || moveV != 0f)
         {
             Vector2 motion = new Vector2(moveH, moveV);
-            rb.AddForce(motion);
-            rb.AddForce(motion * speed);
+            rb.AddForce(motion * moveSpeed);
             rb.mass = rb.mass * 0.9999f;
         }
         else if (mouseH != 0f || mouseV != 0f)
         {
-            Vector2 motion = new Vector2(mouseH * 2f, mouseV * 2f);
-            rb.AddForce(motion);
-            rb.AddForce(motion * speed);
+            Vector2 motion = new Vector2(mouseH * mouseMultiplier, mouseV * mouseMultiplier);
+            rb.AddForce(motion * moveSpeed);
+            rb.mass = rb.mass * 0.9999f;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -143,24 +144,23 @@ public class ShipController : MonoBehaviour {
             txtAmmo.text = "Ammo: " + (weaponsLoad - shotCounter);
 
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-            Vector2 motion = new Vector2(10f, 0f);
-            bullet.GetComponent<Rigidbody2D>().AddForce(motion * speed * (3 + SceneManager.GetActiveScene().buildIndex));
+            Vector2 motion = new Vector2(10f, 0f) * 10f;
+            bullet.GetComponent<Rigidbody2D>().AddForce(motion * (3 + SceneManager.GetActiveScene().buildIndex));
 
             //Debug.Log("Firing\n");
-            Destroy(bullet, 8f);
+            Destroy(bullet, 10f);
         }
     }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("ShipController collision " + other.tag);
+        //Debug.Log("ShipController collision " + other.tag);
 
         if (other.tag.Equals("enemy"))
         {
             health--;
             enemyCollision.Play();
-            Destroy(other.gameObject);
         }
 
         if (other.tag.Equals("enemybullet"))
@@ -182,7 +182,6 @@ public class ShipController : MonoBehaviour {
         {
             rockSound.Play();
             health = health - (int) (other.GetComponent<Rigidbody2D>().mass * 10f);
-            Destroy(other.gameObject);
         }
     }
 

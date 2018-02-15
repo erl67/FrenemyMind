@@ -12,21 +12,14 @@ public class BulletEnemy : MonoBehaviour {
 
     void Update()
     {
-        gameObject.GetComponent<Transform>().Rotate(new Vector2(Random.Range(80f, 90f), 0f));
-        //if (gameObject.GetComponent<Renderer>().isVisible == false)
-        //{
-        //    Destroy(gameObject);
-        //}
+        gameObject.GetComponent<Transform>().Rotate(new Vector2(Random.Range(45f, 90f), 0f));
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("BE Bullet hit " + other.tag);
 
-        if (other.tag.Equals("player")) //handled in player class
-        {
-        }
-        if (other.tag.Equals("space") || other.tag. Equals("asteroid"))
+        if (other.tag.Equals("space") || other.tag. Equals("asteroid") || other.tag.Equals("spaceship"))
         {
             Destroy(gameObject);
         }

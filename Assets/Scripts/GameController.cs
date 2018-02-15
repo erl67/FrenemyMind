@@ -18,17 +18,15 @@ public class GameController : MonoBehaviour {
 
     private float speed;
 
-    private float timeElapsed;
-    private float startTime;
+    private float timeElapsed, startTime, interval;
     private float volume;
 
-    private float speedMin, speedMax, gMin, gMax, mMin, mMax, sMin, sMax, interval;
+    private float speedXMin, speedXMax, speedYMin, speedYMax, speedX, speedY, gMin, gMax, massMin, massMax, scaleMin, scaleMax;
     private Vector3 scale;
 
     public bool gameOver;
     public bool spawn = true;
     private bool rocks = false;
-
 
     private void Awake()
     {
@@ -50,26 +48,30 @@ public class GameController : MonoBehaviour {
         switch (SceneManager.GetActiveScene().buildIndex)
         {
             case 0:
-                speedMin = 20f;
-                speedMax = 70f;
-                gMin = -.03f;
-                gMax = .03f;
-                mMin = .9f;
-                mMax = 1.1f;
-                sMin = .9f;
-                sMax = 1.1f;
+                speedXMin = 20f;
+                speedXMax = 100f;
+                speedYMin = -5f;
+                speedYMax = 5f;
+                gMin = -.01f;
+                gMax = .01f;
+                massMin = .9f;
+                massMax = 1.1f;
+                scaleMin = .9f;
+                scaleMax = 1.1f;
                 interval = .1f;
                 break;
             case 1:
-                speedMin = 50f;
-                speedMax = 100f;
-                gMin = -.2f;
-                gMax = .2f;
-                mMin = .7f;
-                mMax = 1.3f;
-                sMin = .5f;
-                sMax = 1.5f;
-                interval = .1f;
+                speedXMin = 50f;
+                speedXMax = 200f;
+                speedYMin = -10f;
+                speedYMax = 10f;
+                gMin = -.1f;
+                gMax = .1f;
+                massMin = .7f;
+                massMax = 1.3f;
+                scaleMin = .5f;
+                scaleMax = 1.5f;
+                interval = .2f;
                 rocks = true;
                 break;
             default:
@@ -119,40 +121,51 @@ public class GameController : MonoBehaviour {
             AudioListener.volume = AudioListener.volume * 1.05f;
         }
 
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            ShipController.health = 999;
+            ShipController.goal = 99;
+            ShipController.weaponsLoad = 999;
+        }
+
         timeElapsed += Time.deltaTime;
 
         if (Time.frameCount % 100 == 0 && spawn)
         {
-            //Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-            //Debug.Log(stageDimensions.x + " " + stageDimensions.y);
             Vector3 spawnOffset = new Vector3(0f, Random.Range(6f, -4f), 0f);
             var enemy = (GameObject)Instantiate(enemyCraftPrefab, transform.position + spawnOffset, transform.rotation);
-            scale = enemy.GetComponent<Rigidbody2D>().transform.localScale * Random.Range(sMin, sMax);
+
+            scale = enemy.GetComponent<Rigidbody2D>().transform.localScale * Random.Range(scaleMin, scaleMax);
             enemy.GetComponent<Rigidbody2D>().transform.localScale = scale;
-            speed = Random.Range(speedMin, speedMax) * -1;
-            enemy.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0f));
+
+            speedX = Random.Range(speedXMin, speedXMax) * -1;
+            speedY = Random.Range(speedYMin, speedYMax);
+            enemy.GetComponent<Rigidbody2D>().AddForce(new Vector2(speedX, speedY));
+
             enemy.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin, gMax);
-            enemy.GetComponent<Rigidbody2D>().mass = Random.Range(mMin, mMax);
+            enemy.GetComponent<Rigidbody2D>().mass = Random.Range(massMin, massMax);
         }
 
         if (timeElapsed % 3 < interval && spawn && rocks)
         {
-            //Vector3 spawnOffset = new Vector3(Random.Range(9f, 12f), Random.Range(-5F, 5f), 0f);
+            //Vector3 spawnOffset = new Vector3(Random.Range(9f, 12f), Random.Range(-5F, 5f), 0f);  //testing different spawn locations
             //Vector3 spawnOffset = new Vector3(0f, Random.Range(-5F, 5f), 0f);
-            Vector3 spawnOffset = new Vector3(Random.Range(-2f, 2f), Random.Range(-10f, 10f), 0f);
-
+            Vector3 spawnOffset = new Vector3(Random.Range(0f, 2f), Random.Range(-7f, 7f), 0f);
 
             var rock = (GameObject)Instantiate(asteroidPrefab, transform.position + spawnOffset, transform.rotation);
 
-            rock.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, Random.Range(0f, 90f)));  //make rocks look different
+            rock.GetComponent<Transform>().Rotate(new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), Random.Range(0f, 90f)));  //make rocks look different
 
-            scale = rock.GetComponent<Rigidbody2D>().transform.localScale * Random.Range(sMin, sMax);
+            scale = rock.GetComponent<Rigidbody2D>().transform.localScale * Random.Range(scaleMin, scaleMax);
             rock.GetComponent<Rigidbody2D>().transform.localScale = scale;
-            rock.GetComponent<Rigidbody2D>().mass = 1f * rock.GetComponent<Rigidbody2D>().transform.localScale.x * rock.GetComponent<Rigidbody2D>().transform.localScale.y;
+            rock.GetComponent<Rigidbody2D>().mass = rock.GetComponent<Rigidbody2D>().transform.localScale.x * rock.GetComponent<Rigidbody2D>().transform.localScale.y;
 
-            speed = Random.Range(10f, 200f) * -1;
-            rock.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0f));
-            rock.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin -.1f, gMax + .1f);
+            speedX = Random.Range(-20f, -250f);
+            speedY = Random.Range(0f, 20f);
+            rock.GetComponent<Rigidbody2D>().AddForce(new Vector2(speedX, speedY));
+
+            rock.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin, gMax);
+            rock.GetComponent<Rigidbody2D>().angularVelocity = Random.Range(-60f, 60f);
         }
 
     }
@@ -164,7 +177,7 @@ public class GameController : MonoBehaviour {
 
     public void MuteBG()
     {
-        background.mute = true;
+        background.mute = true;     //doesn't work on it's own in PlayerDead()
     }
 
     public void PlayerDead()

@@ -54,7 +54,7 @@ public class Asteroid : MonoBehaviour {
     {
         if (other.tag.Equals("asteroid"))
         {
-            ReduceAsteroid(.995f, 1f);
+            ReduceAsteroid(.997f, 1f);
         }
         if (other.tag.Equals("spaceship"))
         {
@@ -68,7 +68,7 @@ public class Asteroid : MonoBehaviour {
 
         if (other.tag.Equals("enemy"))
         {
-            ReduceAsteroid(.8f, .9f);
+            ReduceAsteroid(.9f, .95f);
         }
 
         if (other.tag.Equals("asteroid"))

@@ -17,6 +17,17 @@ public class BulletPlayer : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        if (other.tag.Equals("enemybullet"))
+        {
+            if (Random.Range(0, 10) > 5)
+            {
+                GetComponent<Collider2D>().enabled = false;
+                GetComponent<Rigidbody2D>().angularVelocity = Random.Range(0f, 1000f);
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, Random.Range(-200f, 200f)));
+                Destroy(gameObject, 3f);
+            }
+        }
     }
 
     void OnBecameInvisible()

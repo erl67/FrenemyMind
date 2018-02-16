@@ -17,15 +17,16 @@ public class GameController : MonoBehaviour {
 
     private float speed;
 
-    private float timeElapsed, startTime, interval;
-    private float volume;
+    private float timeElapsed, interval;
+    private float volume, timer, timer2;
 
     private float speedXMin, speedXMax, speedYMin, speedYMax, speedX, speedY, gMin, gMax, massMin, massMax, scaleMin, scaleMax;
+    private float spawnMin, spawnMax;
     private Vector3 scale;
 
     public bool gameOver;
     public bool spawn = true;
-    private bool rocks = false;
+    private bool rocks, spawnShip = false, spawnRock=true;
 
     private void Awake()
     {
@@ -57,7 +58,10 @@ public class GameController : MonoBehaviour {
                 massMax = 1.1f;
                 scaleMin = .9f;
                 scaleMax = 1.1f;
+                spawnMin = 1f;
+                spawnMax = 4f;
                 interval = .1f;
+                timer = Time.time + 3;
                 break;
             case 1:
                 speedXMin = 50f;
@@ -70,7 +74,11 @@ public class GameController : MonoBehaviour {
                 massMax = 1.3f;
                 scaleMin = .5f;
                 scaleMax = 1.5f;
+                spawnMin = .4f;
+                spawnMax = 3f;
                 interval = .2f;
+                timer = Time.time + 2;
+                timer2 = Time.time + 3;
                 rocks = true;
                 break;
             default:
@@ -98,7 +106,7 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             PlayerDead();
-            //UnityEditor.EditorApplication.isPlaying = false;  //hide for build
+            UnityEditor.EditorApplication.isPlaying = false;  //hide for build
             Application.Quit();
         }
 
@@ -120,7 +128,7 @@ public class GameController : MonoBehaviour {
             AudioListener.volume = AudioListener.volume * 1.05f;
         }
 
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F1) || Input.GetKeyDown(KeyCode.H))
         {
             ShipController.health = 999;
             ShipController.goal = 99;
@@ -130,6 +138,7 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //Time.timeScale = 1; //if your hit after winning game lets you fly or not
         }
 
         if (Input.GetKeyDown(KeyCode.Home))
@@ -139,7 +148,21 @@ public class GameController : MonoBehaviour {
 
         timeElapsed += Time.deltaTime;
 
-        if (Time.frameCount % 100 == 0 && spawn)
+        //if (timeElapsed % 3 < interval)           //trying to figure out the best way to time things
+        //if (Time.frameCount % 100 == 0 && spawn)
+        if (timer < Time.time)
+        {
+            spawnShip = true;
+            timer = Time.time + Random.Range(spawnMin, spawnMax);
+        }
+
+        if (timer2 < Time.time)
+        {
+            spawnRock = true;
+            timer2 = Time.time + Random.Range(.1f, .8f);
+        }
+
+        if (spawnShip && spawn)
         {
             Vector3 spawnOffset = new Vector3(0f, Random.Range(6f, -4f), 0f);
             var enemy = (GameObject)Instantiate(enemyCraftPrefab, transform.position + spawnOffset, transform.rotation);
@@ -153,9 +176,11 @@ public class GameController : MonoBehaviour {
 
             enemy.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin, gMax);
             enemy.GetComponent<Rigidbody2D>().mass = Random.Range(massMin, massMax);
+            spawnShip = false;
         }
 
-        if (timeElapsed % 3 < interval && spawn && rocks)
+        //if (timeElapsed % 3 < interval && spawn && rocks)
+        if (spawnRock && spawn && rocks)
         {
             //Vector3 spawnOffset = new Vector3(Random.Range(9f, 12f), Random.Range(-5F, 5f), 0f);  //testing different spawn locations
             //Vector3 spawnOffset = new Vector3(0f, Random.Range(-5F, 5f), 0f);
@@ -175,6 +200,7 @@ public class GameController : MonoBehaviour {
 
             rock.GetComponent<Rigidbody2D>().gravityScale = Random.Range(gMin, gMax);
             rock.GetComponent<Rigidbody2D>().angularVelocity = Random.Range(-60f, 60f);
+            spawnRock = false;
         }
 
     }

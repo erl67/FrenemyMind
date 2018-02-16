@@ -73,7 +73,7 @@ public class EnemyShip1 : MonoBehaviour {
             //y = GetComponent<Rigidbody2D>().velocity.y * 1.1f;
             //m = GetComponent<Rigidbody2D>().velocity.magnitude;
             //GetComponent<Rigidbody2D>().velocity = new Vector2(x, y) * m;
-            GetComponent<Rigidbody2D>().gravityScale = GetComponent<Rigidbody2D>().gravityScale * 1.1f;
+            GetComponent<Rigidbody2D>().gravityScale = GetComponent<Rigidbody2D>().gravityScale * 1.2f;
         }
 
         if (other.tag.Equals("spaceship"))
@@ -81,7 +81,7 @@ public class EnemyShip1 : MonoBehaviour {
             ShipDies();
         }
 
-        if (other.tag.Equals("asteroid") && other.GetComponent<Rigidbody2D>().mass > 1.3f)
+        if (other.tag.Equals("asteroid") && other.GetComponent<Rigidbody2D>().mass > 1.5f)
         {
             ShipDies();
         }
